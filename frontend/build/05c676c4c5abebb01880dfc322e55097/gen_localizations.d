@@ -1,0 +1,1 @@
+ D:\\project\\giving\\frontend\\lib\\l10n\\app_localizations_ar.dart D:\\project\\giving\\frontend\\lib\\l10n\\app_localizations.dart:  D:\\project\\giving\\frontend\\l10n.yaml D:\\project\\giving\\frontend\\lib\\l10n\\app_ar.arb

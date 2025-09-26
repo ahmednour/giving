@@ -1,0 +1,18 @@
+{
+  "appTitle": "جسر العطاء",
+  "@appTitle": {},
+  "login": "تسجيل الدخول",
+  "@login": {},
+  "register": "إنشاء حساب",
+  "@register": {},
+  "email": "البريد الإلكتروني",
+  "@email": {},
+  "password": "كلمة المرور",
+  "@password": {},
+  "name": "الاسم",
+  "@name": {},
+  "dontHaveAnAccount": "ليس لديك حساب؟",
+  "@dontHaveAnAccount": {},
+  "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
+  "@alreadyHaveAccount": {}
+}

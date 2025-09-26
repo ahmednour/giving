@@ -1,0 +1,95 @@
+version: "3.8"
+
+services:
+  # MySQL Database
+  mysql-db:
+    image: mysql:8.0
+    container_name: giving_bridge_mysql_dev
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: giving_bridge
+      MYSQL_USER: app_user
+      MYSQL_PASSWORD: app_password
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql_dev_data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - giving_bridge_dev_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+    command: --default-authentication-plugin=mysql_native_password
+
+  # Backend API (Development)
+  backend-dev:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: giving_bridge_backend_dev
+    restart: unless-stopped
+    environment:
+      NODE_ENV: development
+      PORT: 8000
+      DB_HOST: mysql-db
+      DB_USER: root
+      DB_PASSWORD: password
+      DB_NAME: giving_bridge
+      DB_PORT: 3306
+      JWT_SECRET: dev-jwt-secret-key
+      JWT_EXPIRES_IN: 24h
+      JWT_REFRESH_EXPIRES_IN: 7d
+      FRONTEND_URL: http://localhost:3001
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/src:/app/src:ro
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+    networks:
+      - giving_bridge_dev_network
+    command: ["npm", "run", "dev"]
+
+  # Frontend Web App (Development)
+  frontend-dev:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: giving_bridge_frontend_dev
+    restart: unless-stopped
+    ports:
+      - "3001:80"
+    depends_on:
+      - backend-dev
+    networks:
+      - giving_bridge_dev_network
+
+  # phpMyAdmin for database management
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: giving_bridge_phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: mysql-db
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: password
+    ports:
+      - "8080:80"
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+    networks:
+      - giving_bridge_dev_network
+
+volumes:
+  mysql_dev_data:
+    driver: local
+
+networks:
+  giving_bridge_dev_network:
+    driver: bridge
