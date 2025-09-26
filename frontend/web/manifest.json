@@ -1,0 +1,12 @@
+{
+  "name": "Giving Bridge",
+  "short_name": "Giving Bridge",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2196F3",
+  "description": "A donation and community help platform that connects donors and receivers.",
+  "orientation": "portrait-primary",
+  "prefer_related_applications": false,
+  "icons": []
+}
