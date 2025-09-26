@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+    <base href="$FLUTTER_BASE_HREF" />
+
+    <meta charset="UTF-8" />
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Giving Bridge - Connect donors with those in need through our secure, transparent platform. Make a difference in your community with verified requests and direct impact tracking."
+    />
+    <meta
+      name="keywords"
+      content="charity, donation, giving, community, help, support, fundraising, volunteer"
+    />
+    <meta name="author" content="Giving Bridge" />
+
+    <!-- iOS meta tags & icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Giving Bridge" />
+    <link rel="apple-touch-icon" href="icons/Icon-192.png" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png" />
+
+    <!-- Open Graph meta tags -->
+    <meta
+      property="og:title"
+      content="Giving Bridge - Connect Generosity with Need"
+    />
+    <meta
+      property="og:description"
+      content="Bridge the gap between donors and those in need through our secure, transparent platform. Make a difference in your community today."
+    />
+    <meta property="og:image" content="icons/Icon-512.png" />
+    <meta property="og:url" content="https://givingbridge.app" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Card meta tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Giving Bridge - Connect Generosity with Need"
+    />
+    <meta
+      name="twitter:description"
+      content="Bridge the gap between donors and those in need through our secure, transparent platform."
+    />
+    <meta name="twitter:image" content="icons/Icon-512.png" />
+
+    <title>Giving Bridge - Connect Generosity with Need</title>
+    <link rel="manifest" href="manifest.json" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* Loading screen styles */
+      .loading-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        font-family: "Inter", sans-serif;
+      }
+
+      .loading-logo {
+        width: 80px;
+        height: 80px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 24px;
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      .loading-logo::before {
+        content: "❤️";
+        font-size: 40px;
+      }
+
+      .loading-text {
+        color: white;
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 16px;
+      }
+
+      .loading-spinner {
+        width: 32px;
+        height: 32px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-top: 3px solid white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Hide loading screen when Flutter is ready */
+      .flutter-ready .loading-container {
+        display: none;
+      }
+
+      /* Prevent flash of unstyled content */
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #fafafa;
+        font-family: "Inter", sans-serif;
+      }
+
+      /* Dark mode support */
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #0f172a;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loading Screen -->
+    <div class="loading-container">
+      <div class="loading-logo"></div>
+      <div class="loading-text">Giving Bridge</div>
+      <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Flutter app will be inserted here -->
+    <script>
+      window.addEventListener("flutter-first-frame", function () {
+        document.body.classList.add("flutter-ready");
+      });
+
+      // Service Worker registration
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("flutter-first-frame", function () {
+          navigator.serviceWorker.register("flutter_service_worker.js");
+        });
+      }
+
+      // Disable right-click context menu in production
+      // document.addEventListener('contextmenu', function(e) {
+      //   e.preventDefault();
+      // });
+
+      // Disable text selection in production
+      // document.onselectstart = function() {
+      //   return false;
+      // };
+
+      // Console welcome message
+      console.log(
+        "%c🎉 Welcome to Giving Bridge!",
+        "color: #667EEA; font-size: 16px; font-weight: bold;"
+      );
+      console.log(
+        "%cBuilt with Flutter Web 💙",
+        "color: #02569B; font-size: 14px;"
+      );
+    </script>
+    <script src="flutter.js" defer></script>
+  </body>
+</html>
